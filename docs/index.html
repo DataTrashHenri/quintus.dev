@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quintus.dev - Henri</title>
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #000000;
+      --bg-gradient: linear-gradient(135deg, #140350, #016583, #2b016d);
+      --text-color: #ffffff;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --accent-color: #048600;
+      --transition-speed: 0.3s;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      flex-direction: column;
+    }
+    .profile-card {
+      background-color: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      padding: 40px 30px;
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+      margin-bottom: 30px;
+    }
+    .profile-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+    }
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+    p.bio {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      line-height: 1.5;
+      color: #333;
+    }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    .social-links a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform var(--transition-speed), background-color var(--transition-speed);
+    }
+    .social-links a svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--text-color);
+      transition: fill var(--transition-speed);
+    }
+    .social-links a:hover {
+      transform: scale(1.15);
+      background-color: var(--primary-color);
+    }
+    .social-links a:hover svg {
+      fill: #ffffff;
+    }
+    .repo-card {
+      background-color: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 100%;
+      padding: 30px;
+      text-align: center;
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    }
+    .repo-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+    }
+    .repo-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+    .repo-card p {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .repo-card a {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: var(--accent-color);
+      color: var(--text-color);
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color var(--transition-speed);
+    }
+    .repo-card a:hover {
+      background-color: var(--primary-color);
+    }
+    @media (max-width: 480px) {
+      .profile-card {
+        padding: 20px 15px;
+      }
+      .repo-card {
+        padding: 20px 15px;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      p.bio {
+        font-size: 0.9rem;
+      }
+    }
+    .card-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch; /* Ensure side cards stretch */
+  width: 100%;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
+  gap: 30px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.side-card {
+  flex: 1;
+  max-width: 300px;
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+  align-self: stretch;
+}
+
+@media (max-width: 1024px) {
+  .side-card {
+    display: none;
+  }
+}
+.quote-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  text-align: center;
+}
+
+.quote-card blockquote {
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #333;
+  position: relative;
+  max-width: 240px;
+}
+
+.quote-card blockquote::before {
+  
+  font-size: 3rem;
+  color: #bbb;
+  position: absolute;
+  top: -20px;
+  left: -20px;
+}
+
+
+.quote-card footer {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.image-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+@media (max-width: 1024px) {
+  .side-card {
+    display: none;
+  }
+}
+
+
+
+  </style>
+</head>
+<body>
+  <div class="card-container">
+  <!-- Linke Karte: Zitat -->
+  <div class="side-card quote-card">
+    <blockquote>
+      <p>“Programs must be written for people to read, and only incidentally for machines to execute.”</p>
+      <footer>– Harold Abelson</footer>
+    </blockquote>
+  </div>
+
+  <!-- Hauptinhalt -->
+  <div class="main-content">
+    <div class="profile-card">
+      <img src="20250622_1411_Vibrant Space Donut_simple_compose_01jybrrzv2fp9rwf38kazqyq7m.png" alt="Profile Picture" class="profile-img">
+      <h1>Henri</h1>
+      <p class="bio">Hello I'm Henri, a developer that enjoys creating solutions to practical issues. I like transforming concepts into functional code, whether it's a short script or a larger project. I'm always up for a solid team effort or a creative challenge.</p>
+      <div class="social-links">
+        <a href="https://github.com/DataTrashHenri" target="_blank" aria-label="W3Schools">
+  <svg viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg">
+          <title>GitHub</title>
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.263.82-.583 0-.288-.01-1.05-.015-2.06-3.338.725-4.042-1.61-4.042-1.61-.546-1.385-1.333-1.754-1.333-1.754-1.09-.745.082-.73.082-.73 1.205.085 1.84 1.238 1.84 1.238 1.07 1.835 2.807 1.305 3.492.998.108-.775.418-1.305.76-1.605-2.665-.305-5.467-1.332-5.467-5.93 0-1.31.467-2.38 1.235-3.22-.125-.305-.535-1.535.115-3.195 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.555 3.285-1.23 3.285-1.23.655 1.66.245 2.89.12 3.195.77.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.37.81 1.102.81 2.222 0 1.606-.015 2.896-.015 3.286 0 .325.21.702.825.58C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+</a>
+
+      </div>
+    </div>
+    <div class="repo-card">
+      <h2>Primenumber Calculator</h2>
+      <p>My current project :)</p>
+      <a href="https://github.com/DataTrashHenri/CPrime" target="_blank">View Repository</a>
+    </div>
+  </div>
+
+  <!-- Rechte Karte: Bild -->
+  <div class="side-card image-card">
+    <img src="20250622_1533_Space Donuts Adventure_simple_compose_01jybxdx59fk5bc4wah8wyq31g.png" alt="Creative Visual" />
+  </div>
+</div>
+
+</body>
+</html>
