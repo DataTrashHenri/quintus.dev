@@ -3,279 +3,475 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quintus.dev - Henri</title>
-  <!-- Google Font -->
+  <title>Quintus.dev</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary-color: #000000;
-      --bg-gradient: linear-gradient(135deg, #140350, #016583, #2b016d);
-      --text-color: #ffffff;
-      --card-bg: rgba(255, 255, 255, 0.9);
-      --accent-color: #048600;
-      --transition-speed: 0.3s;
-    }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-    body {
-      background: var(--bg-gradient);
-      color: var(--text-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
-      flex-direction: column;
-    }
-    .profile-card {
-      background-color: var(--card-bg);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
-      max-width: 400px;
-      width: 100%;
-      text-align: center;
-      padding: 40px 30px;
-      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-      margin-bottom: 30px;
-    }
-    .profile-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
-    }
-    .profile-img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 20px;
-    }
-    h1 {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-      font-weight: 600;
-      color: var(--primary-color);
-    }
-    p.bio {
-      font-size: 1rem;
-      margin-bottom: 20px;
-      line-height: 1.5;
-      color: #333;
-    }
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
-    .social-links a {
-      display: inline-block;
-      width: 40px;
-      height: 40px;
-      background-color: var(--accent-color);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform var(--transition-speed), background-color var(--transition-speed);
-    }
-    .social-links a svg {
-      width: 20px;
-      height: 20px;
-      fill: var(--text-color);
-      transition: fill var(--transition-speed);
-    }
-    .social-links a:hover {
-      transform: scale(1.15);
-      background-color: var(--primary-color);
-    }
-    .social-links a:hover svg {
-      fill: #ffffff;
-    }
-    .repo-card {
-      background-color: var(--card-bg);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
-      max-width: 400px;
-      width: 100%;
-      padding: 30px;
-      text-align: center;
-      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-    }
-    .repo-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
-    }
-    .repo-card h2 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-      color: var(--primary-color);
-    }
-    .repo-card p {
-      font-size: 1rem;
-      margin-bottom: 20px;
-      color: #333;
-    }
-    .repo-card a {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: var(--accent-color);
-      color: var(--text-color);
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background-color var(--transition-speed);
-    }
-    .repo-card a:hover {
-      background-color: var(--primary-color);
-    }
-    @media (max-width: 480px) {
-      .profile-card {
-        padding: 20px 15px;
-      }
-      .repo-card {
-        padding: 20px 15px;
-      }
-      h1 {
-        font-size: 1.5rem;
-      }
-      p.bio {
-        font-size: 0.9rem;
-      }
-    }
-    .card-container {
+
+/* === RESET === */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* === DESIGN TOKENS === */
+:root {
+  --accent:      #2dff8f;
+  --accent-glow: rgba(45, 255, 143, 0.22);
+  --glass:       rgba(255, 255, 255, 0.055);
+  --glass-b:     rgba(255, 255, 255, 0.08);
+  --glass-h:     rgba(255, 255, 255, 0.085);
+  --text:        #f0eefc;
+  --muted:       rgba(240, 238, 252, 0.48);
+  --bg:          #07011a;
+  --ease:        cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* === BASE === */
+html { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--text); }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow-x: hidden;
+  background: var(--bg);
+}
+
+/* === BACKGROUND ORBS === */
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+}
+
+.orb-1 {
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, #1e0750 0%, transparent 70%);
+  top: -200px; left: -150px;
+  animation: drift1 20s ease-in-out infinite;
+}
+
+.orb-2 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, #012d3d 0%, transparent 70%);
+  bottom: -150px; right: -100px;
+  animation: drift2 24s ease-in-out infinite;
+}
+
+.orb-3 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, #350080 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.35;
+  animation: drift3 16s ease-in-out infinite;
+}
+
+@keyframes drift1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(55px, 45px); } }
+@keyframes drift2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-45px,-55px); } }
+@keyframes drift3 { 0%,100% { transform: translate(-50%,-50%); } 50% { transform: translate(-43%,-57%); } }
+
+/* Film grain */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* === CURSOR GLOW === */
+.cursor-glow {
+  position: fixed;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(45,255,143,0.032) 0%, transparent 65%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* === LAYOUT === */
+.card-container {
   display: flex;
   justify-content: center;
-  align-items: stretch; /* Ensure side cards stretch */
+  align-items: stretch;
   width: 100%;
-  gap: 20px;
-  flex-wrap: wrap;
+  max-width: 1060px;
+  gap: 14px;
+  position: relative;
+  z-index: 1;
 }
 
 .main-content {
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
-  align-items: center;
-  gap: 30px;
-  max-width: 400px;
+  gap: 12px;
+  max-width: 368px;
   width: 100%;
 }
 
-.side-card {
-  flex: 1;
-  max-width: 300px;
-  background-color: var(--card-bg);
-  border-radius: 16px;
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
-  align-self: stretch;
+/* === GLASS CARD BASE === */
+.card {
+  background: var(--glass);
+  border: 1px solid var(--glass-b);
+  border-radius: 22px;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  will-change: transform;
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-@media (max-width: 1024px) {
-  .side-card {
-    display: none;
-  }
+.card:hover {
+  background: var(--glass-h);
+  border-color: rgba(255,255,255,0.13);
+  box-shadow:
+    0 22px 60px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(255,255,255,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.07);
 }
-.quote-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
+
+/* === PROFILE CARD === */
+.profile-card {
+  padding: 44px 32px 38px;
   text-align: center;
 }
 
-.quote-card blockquote {
-  font-style: italic;
-  font-size: 1.2rem;
-  color: #333;
-  position: relative;
-  max-width: 240px;
-}
-
-.quote-card blockquote::before {
-  
-  font-size: 3rem;
-  color: #bbb;
-  position: absolute;
-  top: -20px;
-  left: -20px;
-}
-
-
-.quote-card footer {
-  margin-top: 15px;
-  font-size: 0.9rem;
-  color: #555;
-}
-
-.image-card {
-  padding: 0;
-  overflow: hidden;
-}
-
-.image-card img {
-  width: 100%;
-  height: 100%;
+.profile-img {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
   object-fit: cover;
-  border-radius: 16px;
+  display: block;
+  margin: 0 auto 26px;
+  background: rgba(255,255,255,0.05);
+  outline: 1.5px solid rgba(45, 255, 143, 0.45);
+  outline-offset: 5px;
+  animation: avatarPulse 4s ease-in-out infinite;
 }
 
-@media (max-width: 1024px) {
-  .side-card {
-    display: none;
+@keyframes avatarPulse {
+  0%, 100% {
+    outline-color: rgba(45,255,143,0.25);
+    box-shadow: 0 0 10px rgba(45,255,143,0.08);
+  }
+  50% {
+    outline-color: rgba(45,255,143,0.7);
+    box-shadow: 0 0 28px rgba(45,255,143,0.28);
   }
 }
 
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin-bottom: 10px;
+  line-height: 1;
+}
 
+p.bio {
+  font-size: 0.865rem;
+  line-height: 1.85;
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 28px;
+}
+
+/* === SOCIAL LINKS === */
+.social-links { display: flex; justify-content: center; gap: 10px; }
+
+.social-link {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.09);
+  background: rgba(255,255,255,0.04);
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: scale(0);
+  transition: transform 0.35s var(--ease);
+}
+
+.social-link:hover::before { transform: scale(1); }
+.social-link:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.social-link svg {
+  width: 18px; height: 18px;
+  fill: var(--muted);
+  position: relative; z-index: 1;
+  transition: fill 0.25s ease;
+}
+.social-link:hover svg { fill: #000; }
+
+/* === REPO CARD === */
+.repo-card {
+  padding: 26px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.repo-eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+
+.repo-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.repo-desc { font-size: 0.8rem; color: var(--muted); }
+
+.repo-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 9px 20px;
+  background: var(--accent);
+  color: #000;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: 'Jost', sans-serif;
+  letter-spacing: 0.02em;
+  transition: box-shadow 0.3s ease, transform 0.3s var(--ease);
+}
+
+.repo-btn:hover {
+  box-shadow: 0 0 32px rgba(45,255,143,0.45);
+  transform: scale(1.05);
+}
+
+.btn-arrow {
+  display: inline-block;
+  transition: transform 0.35s var(--ease);
+}
+.repo-btn:hover .btn-arrow { transform: translateX(4px); }
+
+/* === SIDE CARDS === */
+.side-card { flex: 1; max-width: 278px; }
+@media (max-width: 1024px) { .side-card { display: none; } }
+
+/* Quote card */
+.quote-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 44px 34px;
+  height: 100%;
+}
+
+.quote-symbol {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5.5rem;
+  line-height: 0.65;
+  color: var(--accent);
+  opacity: 0.3;
+  display: block;
+  margin-bottom: 14px;
+  user-select: none;
+}
+
+.quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.12rem;
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.quote-author {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Image card */
+.image-card {
+  overflow: hidden;
+  padding: 0;
+  min-height: 300px;
+}
+
+.image-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 22px;
+  transition: transform 0.9s var(--ease);
+}
+
+.image-card:hover img { transform: scale(1.06); }
+
+/* === ENTRANCE ANIMATIONS === */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeUp 0.9s var(--ease) forwards;
+}
+
+.d-1 { animation-delay: 0.08s; }
+.d-2 { animation-delay: 0.20s; }
+.d-3 { animation-delay: 0.33s; }
+.d-4 { animation-delay: 0.14s; }
+
+/* === RESPONSIVE === */
+@media (max-width: 480px) {
+  .profile-card { padding: 32px 18px 28px; }
+  .repo-card {
+    padding: 20px 18px;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  h1 { font-size: 2rem; }
+}
 
   </style>
 </head>
 <body>
+
+  <!-- Background -->
+  <div class="bg-layer" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-glow" id="glow" aria-hidden="true"></div>
+
   <div class="card-container">
-  <!-- Linke Karte: Zitat -->
-  <div class="side-card quote-card">
-    <blockquote>
-      <p>“Programs must be written for people to read, and only incidentally for machines to execute.”</p>
-      <footer>– Harold Abelson</footer>
-    </blockquote>
-  </div>
 
-  <!-- Hauptinhalt -->
-  <div class="main-content">
-    <div class="profile-card">
-      <img src="20250622_1411_Vibrant Space Donut_simple_compose_01jybrrzv2fp9rwf38kazqyq7m.png" alt="Profile Picture" class="profile-img">
-      <h1>Quintus</h1>
-      <p class="bio">Hello I'm Quintus, a developer that enjoys creating solutions to practical issues. I like transforming concepts into functional code, whether it's a short script or a larger project. I'm always up for a solid team effort or a creative challenge.</p>
-      <div class="social-links">
-        <a href="https://github.com/DataTrashHenri" target="_blank" aria-label="W3Schools">
-  <svg viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg">
-          <title>GitHub</title>
-          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.263.82-.583 0-.288-.01-1.05-.015-2.06-3.338.725-4.042-1.61-4.042-1.61-.546-1.385-1.333-1.754-1.333-1.754-1.09-.745.082-.73.082-.73 1.205.085 1.84 1.238 1.84 1.238 1.07 1.835 2.807 1.305 3.492.998.108-.775.418-1.305.76-1.605-2.665-.305-5.467-1.332-5.467-5.93 0-1.31.467-2.38 1.235-3.22-.125-.305-.535-1.535.115-3.195 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.555 3.285-1.23 3.285-1.23.655 1.66.245 2.89.12 3.195.77.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.37.81 1.102.81 2.222 0 1.606-.015 2.896-.015 3.286 0 .325.21.702.825.58C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/>
-        </svg>
-</a>
+    <!-- Left: Quote -->
+    <div class="side-card card quote-card fade-in d-1">
+      <blockquote>
+        <span class="quote-symbol" aria-hidden="true">"</span>
+        <p class="quote-text">Programs must be written for people to read, and only incidentally for machines to execute.</p>
+        <footer class="quote-author">— Harold Abelson</footer>
+      </blockquote>
+    </div>
 
+    <!-- Main -->
+    <div class="main-content">
+
+      <div class="card profile-card fade-in d-2">
+        <img
+          src="20250622_1411_Vibrant Space Donut_simple_compose_01jybrrzv2fp9rwf38kazqyq7m.png"
+          alt="Profile Picture"
+          class="profile-img"
+        >
+        <h1>Quintus</h1>
+        <p class="bio">Hello, I'm Quintus — a developer who enjoys creating solutions to practical issues. I like transforming concepts into functional code, whether it's a short script or a larger project. Always up for a solid team effort or a creative challenge.</p>
+        <div class="social-links">
+          <a href="https://github.com/DataTrashHenri" target="_blank" rel="noopener" aria-label="GitHub" class="social-link">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.263.82-.583 0-.288-.01-1.05-.015-2.06-3.338.725-4.042-1.61-4.042-1.61-.546-1.385-1.333-1.754-1.333-1.754-1.09-.745.082-.73.082-.73 1.205.085 1.84 1.238 1.84 1.238 1.07 1.835 2.807 1.305 3.492.998.108-.775.418-1.305.76-1.605-2.665-.305-5.467-1.332-5.467-5.93 0-1.31.467-2.38 1.235-3.22-.125-.305-.535-1.535.115-3.195 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.555 3.285-1.23 3.285-1.23.655 1.66.245 2.89.12 3.195.77.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.37.81 1.102.81 2.222 0 1.606-.015 2.896-.015 3.286 0 .325.21.702.825.58C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+          </a>
+        </div>
       </div>
+
+      <div class="card repo-card fade-in d-3">
+        <div>
+          <div class="repo-eyebrow">Current Project</div>
+          <div class="repo-title">Physics Wave Simulation</div>
+          <div class="repo-desc">An interactive physics experiment :)</div>
+        </div>
+        <a href="./game/" target="_blank" class="repo-btn">
+          Open <span class="btn-arrow">→</span>
+        </a>
+      </div>
+
     </div>
-    <div class="repo-card">
-      <h2>Physics Wave Simulation</h2>
-      <p>My current project :)</p>
-      <a href="./game/" target="_blank">Open App</a>
+
+    <!-- Right: Image -->
+    <div class="side-card card image-card fade-in d-4">
+      <img
+        src="20250622_1533_Space Donuts Adventure_simple_compose_01jybxdx59fk5bc4wah8wyq31g.png"
+        alt="Creative Visual"
+      >
     </div>
+
   </div>
 
-  <!-- Rechte Karte: Bild -->
-  <div class="side-card image-card">
-    <img src="20250622_1533_Space Donuts Adventure_simple_compose_01jybxdx59fk5bc4wah8wyq31g.png" alt="Creative Visual" />
-  </div>
-</div>
+  <script>
+    /* ── Smooth cursor glow ── */
+    const glow = document.getElementById('glow');
+    let cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+    let gx = cx, gy = cy;
 
+    window.addEventListener('mousemove', e => {
+      cx = e.clientX;
+      cy = e.clientY;
+    });
+
+    (function tick() {
+      gx += (cx - gx) * 0.065;
+      gy += (cy - gy) * 0.065;
+      glow.style.left = gx + 'px';
+      glow.style.top  = gy + 'px';
+      requestAnimationFrame(tick);
+    })();
+
+    /* ── 3D tilt on card hover (skip image card) ── */
+    document.querySelectorAll('.card:not(.image-card)').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width  - 0.5;
+        const y = (e.clientY - r.top)  / r.height - 0.5;
+        card.style.transform =
+          `perspective(900px) translateY(-8px) rotateX(${-y * 9}deg) rotateY(${x * 9}deg)`;
+        card.style.transition =
+          'background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease';
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform =
+          'perspective(900px) translateY(0) rotateX(0) rotateY(0)';
+        card.style.transition =
+          'transform 0.7s cubic-bezier(0.23,1,0.32,1), background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease';
+      });
+    });
+  </script>
 </body>
 </html>
-
-
